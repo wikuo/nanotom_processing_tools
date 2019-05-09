@@ -6,7 +6,6 @@ clear all;
 
 filelocation = '';
 filenumber = 1; % Choose which file to process if there are multiple files in folder
-filebitsize = 'uint16'; % bit depth of the raw data. Internal calculations currently set to uint16.
 filebyteorder = 'l'; % 'l' for Nanotom raw data, 'b' for Fiji .raw export
 
 roiexclude = 600; % number of slices to exclude from top and bottom to remove cone beam artifact
@@ -25,7 +24,7 @@ clearvars pcrfilelist pcrfileID pcrfileContent;
 %% Read .vol file
 volfilelist = dir([filelocation '/*.vol']);
 volfileID = fopen([filelocation '/' volfilelist(filenumber).name],'r',filebyteorder);
-voldata = uint16(fread(volfileID,[1,ROI_SizeX*ROI_SizeY*ROI_SizeZ],filebitsize));
+voldata = fread(volfileID,[1,ROI_SizeX*ROI_SizeY*ROI_SizeZ],'uint16=>uint16');% change 'uint16=uint16' if reading files with another bit depth
 fclose(volfileID);
 voldata = reshape(voldata,ROI_SizeX,ROI_SizeY,ROI_SizeZ);
 clearvars volfilelist volfileID;
