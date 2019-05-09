@@ -18,5 +18,7 @@ Note that XY requires only a single sequential read, while XZ needs to skip one 
 Runtime per orthogonal slice (average of 45 datasets, from a regular hard drive):
 
 XY: 0.15 s
+
 XZ:  24 s
+
 YZ: 100 s
